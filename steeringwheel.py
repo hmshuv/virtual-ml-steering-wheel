@@ -1,6 +1,6 @@
 import cv2
 import mediapipe as mp
-import pydirectinput
+import pyautogui
 import directinput
 import time
 
