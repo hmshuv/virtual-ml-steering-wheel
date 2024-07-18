@@ -18,7 +18,7 @@ while True:
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     blurred = cv2.GaussianBlur(img_hsv, (11, 11), 0)
 
-    colourLower = np.array([64, 72, 117])
+    colourLower = np.array([94, 138, 115])
     colourUpper = np.array([180, 255, 255])
     mask = cv2.inRange(blurred, colourLower, colourUpper)
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
