@@ -1,13 +1,11 @@
 import cv2
 import imutils
 from imutils.video import VideoStream
-import numpy as np 
-from pynput.keyboard import Key, Controller
-
-keyboard = Controller()
+import numpy as np
+from directkeys import PressKey, ReleaseKey, W, A, S, D, Space
 
 cam = VideoStream(src=0).start()
-currentKey = list()
+currentKey = []
 
 while True:
     key_pressed = False
@@ -42,19 +40,19 @@ while True:
         cX = int(M["m10"] / M["m00"])
 
         if cX < (width // 2 - 35):
-            keyboard.press('a')
+            PressKey(A)
             key_pressed = True
-            currentKey.append('a')
-        
+            currentKey.append(A)
+
         elif cX > (width // 2 + 35):
-            keyboard.press('d')
+            PressKey(D)
             key_pressed = True
-            currentKey.append('d')
-    
+            currentKey.append(D)
+
     if len(cnts_down) > 0:
-        keyboard.press(Key.space)
+        PressKey(Space)
         key_pressed = True
-        currentKey.append(Key.space)
+        currentKey.append(Space)
 
     # Convert the image back to BGR for display
     img_bgr = cv2.cvtColor(img_hsv, cv2.COLOR_HSV2BGR)
@@ -72,7 +70,8 @@ while True:
 
     if not key_pressed and len(currentKey) != 0:
         for current in currentKey:
-            keyboard.release(current)
+            ReleaseKey(current)
+        currentKey = []
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
