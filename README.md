@@ -1,6 +1,6 @@
-Here's the content formatted for a `README.md` file in Markdown:
 
-```markdown
+
+
 # Gesture-Based Control System
 
 This project allows users to control keyboard actions using color-based gestures captured through a webcam. The system detects specific colors in the video feed and triggers corresponding key presses.
@@ -21,7 +21,7 @@ Before you begin, ensure you have met the following requirements:
 - Python 3.x installed on your system.
 - `pip` for managing Python packages.
 
-## Installation
+##Installation
 
 1. **Clone the repository:**
 
