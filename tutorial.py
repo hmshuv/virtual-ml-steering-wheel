@@ -2,13 +2,14 @@ import cv2
 import imutils
 from imutils.video import VideoStream
 import numpy as np
-from directkeys import PressKey, ReleaseKey, W, A, S, D, Space
+from directkeys import PressKey, ReleaseKey, W, A, D, S
 
 cam = VideoStream(src=0).start()
 currentKey = []
 
 while True:
     key_pressed = False
+    backward_pressed = False
 
     img = cam.read()
     img = np.flip(img, axis=1)
@@ -34,6 +35,16 @@ while True:
     cnts_down = cv2.findContours(downContour, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts_down = imutils.grab_contours(cnts_down)
 
+    if len(cnts_down) > 0:
+        PressKey(S)
+        key_pressed = True
+        backward_pressed = True
+        currentKey.append(S)
+    else:
+        PressKey(W)  # Press 'W' key if 'S' is not being pressed
+        key_pressed = True
+        currentKey.append(W)
+
     if len(cnts_up) > 0:
         c = max(cnts_up, key=cv2.contourArea)
         M = cv2.moments(c)
@@ -49,11 +60,6 @@ while True:
             key_pressed = True
             currentKey.append(D)
 
-    if len(cnts_down) > 0:
-        PressKey(Space)
-        key_pressed = True
-        currentKey.append(Space)
-
     # Convert the image back to BGR for display
     img_bgr = cv2.cvtColor(img_hsv, cv2.COLOR_HSV2BGR)
 
@@ -64,7 +70,7 @@ while True:
     cv2.putText(img_bgr, 'RIGHT', (440, 30), cv2.FONT_HERSHEY_DUPLEX, 1, (139, 0, 0))
 
     img_bgr = cv2.rectangle(img_bgr, (2 * (width // 5), 3 * height // 4), (3 * width // 5, height), (0, 255, 0), 1)
-    cv2.putText(img_bgr, 'NITRO', (2 * (width // 5) + 20, height - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (139, 0, 0))
+    cv2.putText(img_bgr, 'BACKWARD', (2 * (width // 5) + 20, height - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (139, 0, 0))
 
     cv2.imshow("Steering", img_bgr)
 
@@ -72,6 +78,9 @@ while True:
         for current in currentKey:
             ReleaseKey(current)
         currentKey = []
+
+    if backward_pressed:
+        ReleaseKey(W)
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
