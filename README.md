@@ -1,6 +1,4 @@
-Here's the content formatted for a `README.md` file in Markdown:
 
-```markdown
 # Gesture-Based Control System
 
 This project allows users to control keyboard actions using color-based gestures captured through a webcam. The system detects specific colors in the video feed and triggers corresponding key presses.
