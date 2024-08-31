@@ -4,7 +4,7 @@ This project is a virtual steering wheel controller that allows you to control a
 
 ## Demo Video
 
-[Watch the demo video](sample.mp4)
+![Demo](sample.mp4)
 
 ## Features
 - **Steering**: Move your hand to the left or right to steer the car.
