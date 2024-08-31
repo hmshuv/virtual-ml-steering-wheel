@@ -1,10 +1,10 @@
-Here's the corrected version of your `README.md` file:
-
----
-
 # Virtual Steering Wheel Controller for Car Racing Game
 
 This project is a virtual steering wheel controller that allows you to control a car in a racing game using hand gestures detected through a webcam. The project utilizes computer vision techniques to recognize gestures and translate them into keyboard inputs that control the game.
+
+## Demo Video
+
+[Watch the demo video](sample.mp4)
 
 ## Features
 - **Steering**: Move your hand to the left or right to steer the car.
